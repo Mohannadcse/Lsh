@@ -59,9 +59,10 @@ public class MyParser {
 		
 	}
 
-	private static String parseElement(String element) {
+	public static String parseElement(String element) {
 		//TODO make this invalid tokens bigger
 		//return element.replaceAll("[#@*+%{}<>\\[\\]|\"\\_^]", "");
+		element = element.replace(" ", "");
 		return element.replaceAll("[^a-zA-Z0-9]", "");
 	}
 
