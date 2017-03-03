@@ -6,16 +6,26 @@ public class TestShingles {
 
 	public static void main(String[] args) {
 		
-		String s = "the brown fox blah";
+		String s = "noth carolina michael jordan basketball";
 		String parsedElement = MyParser.parseElement(s);
 		System.out.println(parsedElement);
+		System.out.println();
 		
-		int limit = 14;
+		int k = 3;
 		
+		String result[] = parsedElement.split(" ");
 		
-		
-		for(int i = 0; i < parsedElement.length() - limit + 1; i++){
-			System.out.println(parsedElement.substring(i, i+limit));
+		for(int i = 0; i < result.length - k + 1; i++){
+			int counter = i;
+			String s1 = "";
+			
+			while(counter < (i+k)){
+				s1  = s1 + result[counter] + " ";
+				counter++;
+			}
+			
+			System.out.println(s1);
+			
 		}
 		
 	}
