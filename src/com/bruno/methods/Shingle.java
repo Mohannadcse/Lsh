@@ -1,11 +1,11 @@
-package com.bruno.shingle;
+package com.bruno.methods;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Shingle {
 
-	public List<String> doShingle(String string, int k){
+	public static List<String> doShingle(String string, int k){
 		
 		List<String> listShingles = new ArrayList<String>();
 		

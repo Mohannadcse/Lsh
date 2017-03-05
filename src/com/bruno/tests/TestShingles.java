@@ -1,6 +1,6 @@
 package com.bruno.tests;
 
-import com.bruno.parser.MyParser;
+import com.bruno.helper.MyParser;
 
 public class TestShingles {
 
