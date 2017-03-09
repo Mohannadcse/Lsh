@@ -29,9 +29,14 @@ public class MyReader {
 					element = element.trim();
 					element = MyParser.parseElement(element);
 					
-					if(isGreaterThanThree(element)){
+					if(isGreaterThanThreeAndNotThe(element)){
 						element = element.toLowerCase();
-						validStrings.append(element + " ");
+						
+						if(!"the".contains(element)){
+							
+							validStrings.append(element + " ");
+						}
+						
 						
 					}
 				}
@@ -49,9 +54,11 @@ public class MyReader {
 		return validStrings.toString();
 	}
 	
-	public static boolean isGreaterThanThree(String element) {
-		if(element.length() < 3)
+	public static boolean isGreaterThanThreeAndNotThe(String element) {
+		if(element.length() < 3){
 			return false;
+		}
+			
 		return true;
 	}
 	
