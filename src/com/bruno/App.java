@@ -70,7 +70,7 @@ public class App {
 		
 		
 		//vocabulario tem que ser reduzido
-		int mat[][] = new int[23333][1];
+		int mat[][] = new int[62376][24009];
 		System.out.println("vector created");
 		
 		/*System.out.println("setting bit array for each document");
