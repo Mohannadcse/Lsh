@@ -6,17 +6,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.bruno.model.Document;
 
 public class MyReader {
 
-	public static List<String> readFile(File file){
+	public static Set<String> readFile(File file){
 		
 		FileReader fileReader;
 		List<String> list = new ArrayList<String>();
-		
+		Set<String> set = new HashSet<String>();
 		
 		try {
 			fileReader = new FileReader(file);
@@ -38,7 +40,8 @@ public class MyReader {
 						element = element.toLowerCase();
 						
 						if(!"the".contains(element.trim())){
-							list.add(element.trim());
+							//list.add(element.trim());
+							set.add(element.trim());
 							//validStrings.append(element.trim());
 						}
 					}
@@ -55,7 +58,8 @@ public class MyReader {
 			e.printStackTrace();
 		}
 		
-		return list;
+		return set;
+		//return list;
 		//return validStrings.toString();
 	}
 	

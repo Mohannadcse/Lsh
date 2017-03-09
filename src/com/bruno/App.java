@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.bruno.helper.MyReader;
-import com.bruno.methods.Shingle;
 import com.bruno.model.Document;
 
 public class App {
@@ -31,20 +30,11 @@ public class App {
 		System.out.println("parsing...");
 		for(int i = 0; i < listOfFiles.length; i++){
 			
-			List<String> listValid = MyReader.readFile(listOfFiles[i]);
-			
-			if(listValid.size() < min)
-				min = listValid.size();
-			
-			if(listValid.size() > max)
-				max = listValid.size();
+			Set<String> listValid = MyReader.readFile(listOfFiles[i]);
 			
 			Document document = new Document();
 			
 			document.setName(listOfFiles[i].getName()).setValidWords(listValid);
-			
-			//document.setName(listOfFiles[i].getName());
-			
 			
 			listDocuments.add(document);
 			
@@ -69,35 +59,28 @@ public class App {
 		
 		
 		//vocabulario tem que ser reduzido
-		//int mat[][] = new int[vocabulary.size()/3][listOfFiles.length];//[total_vocabulary, total_documents]
-		//int mat[][] = new int[vocabulary.size()][listOfFiles.length];
-		//System.out.println("vector created");
+
 		
 		System.out.println("setting bit array for each document");
-		
-		/*int counter = 0;
-		for(String word : vocabulary){
-			
-			for(Document document : listDocuments){
-				
-				if(documentHasWord())
-				
-			}
-			
-			counter++;
-		}*/
-		
 		for(Document document : listDocuments){
 			document.initializeBitVector(vocabulary.size());
-			System.out.println(document.getBitVector().length);
-			/*for(int i = 0; i < document.getValidWords().size(); i++){
-				String word = document.getValidWords().get(i);
-				
-				if(vocabulary.contains(word)){
-					document.updateBitVector((byte)1, i);
-				}
-			}*/
 		}
+		
+		int counter = 0;
+
+		for(String word : vocabulary){
+			for(Document document : listDocuments){
+				if(document.hasWord(word)){
+					document.updateBitVector((byte)1, counter);
+				}
+			}
+			counter++;
+		}
+
+		System.out.println(counter);
+		
+		int mat[][] = new int[40][24008];
+		System.out.println("sig matrix created");
 		
 	}
 }
