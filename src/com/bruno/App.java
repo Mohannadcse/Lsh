@@ -13,74 +13,78 @@ import com.bruno.model.Document;
 
 public class App {
 	
-	private static final int K = 9;
-	
 	public static void main(String[] args) {
 		
 		Set<String> vocabulary = new HashSet<String>();
 		List<Document> listDocuments = new ArrayList<Document>();
+		List<String> valid = new ArrayList<String>();
+		List<String> listValidElementsByDocument = new ArrayList<String>();
 		
-		//File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
-		File folder = new File("/home/bsilva/Desktop/F16PA2");
+		
+		File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
+		//File folder = new File("/home/bsilva/Desktop/F16PA2");
 		File[] listOfFiles = folder.listFiles();
-
-		List<String> listValidElementsByDocument = new ArrayList<String>(); 
+		 
+		int min = Integer.MAX_VALUE;
+		int max = 0;
 		
-		System.out.println("reading documents...");
+		System.out.println("parsing...");
 		for(int i = 0; i < listOfFiles.length; i++){
 			
-			String validElements = MyReader.readFile(listOfFiles[i]);
+			List<String> listValid = MyReader.readFile(listOfFiles[i]);
 			
-			listValidElementsByDocument.add(validElements);
+			if(listValid.size() < min)
+				min = listValid.size();
 			
+			if(listValid.size() > max)
+				max = listValid.size();
+			
+			Document document = new Document();
+			
+			document.setName(listOfFiles[i].getName())
+				.setValidWords(listValid);
+			
+			/*if(listValid.size() == 1){
+				System.out.println("stop");
+			}*/
+			
+			listDocuments.add(document);
+			
+			for(String s : listValid){
+				listValidElementsByDocument.add(s);
+			}
 		}
+		
+		System.out.println("min: " + min);
+		System.out.println("max: " + max);
 		
 		System.out.println("valid elements: " + listValidElementsByDocument.size());
 
-		int totalShingle = 0;
-		int counter = 0;
-		
-		System.out.println("shingling and constructing vocabulary...");
+		System.out.println("building vocabulary...");
 		for(String validString : listValidElementsByDocument){
 			
-			/*List<String> shingles = Shingle.doShingle(validString, K);
-			
-			totalShingle = totalShingle + shingles.size();
-			//for each shingle, if its unique, put in vocabulary
-			for(String shingle : shingles){
-				vocabulary.add(shingle);
-			}*/
-			
 			vocabulary.add(validString);
-			
-			/*Document document = new Document();
-			document.setName(listOfFiles[counter].getName()).setShingles(shingles);
-			listDocuments.add(document);*/
-			
-			counter++;
 		}
 		
 		System.out.println("Vocabulary: " + vocabulary.size());
 		
 		
-		/*
-		System.out.println("setting bit array for each document");
+		//vocabulario tem que ser reduzido
+		int mat[][] = new int[23333][1];
+		System.out.println("vector created");
+		
+		/*System.out.println("setting bit array for each document");
 		for(Document document : listDocuments){
 			document.initializeBitVector(vocabulary.size());
 			
-			for(int i = 0; i < document.getShingles().size(); i++){
-				String shingle = document.getShingles().get(i);
+			for(int i = 0; i < document.getValidWords().size(); i++){
+				String word = document.getValidWords().get(i);
 				
-				if(vocabulary.contains(shingle)){
-					document.updateBitVector(1, i);
+				if(vocabulary.contains(word)){
+					document.updateBitVector((byte)1, i);
 				}
 			}
-			
-		}
+		}*/
 		
-		System.out.println("total shingle: " + totalShingle);
-		System.out.println("size world: " + vocabulary.size());
-		*/
 	}
-	
 }

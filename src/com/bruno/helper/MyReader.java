@@ -5,15 +5,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.bruno.model.Document;
 
 public class MyReader {
 
-	public static String readFile(File file){
+	public static List<String> readFile(File file){
 		
 		FileReader fileReader;
-		StringBuilder validStrings = new StringBuilder();
+		List<String> list = new ArrayList<String>();
 		
 		try {
 			fileReader = new FileReader(file);
@@ -32,9 +34,9 @@ public class MyReader {
 					if(isGreaterThanThreeAndNotThe(element)){
 						element = element.toLowerCase();
 						
-						if(!"the".contains(element)){
-							
-							validStrings.append(element + " ");
+						if(!"the".contains(element.trim())){
+							list.add(element.trim());
+							//validStrings.append(element + " ");
 						}
 						
 						
@@ -44,14 +46,15 @@ public class MyReader {
 			
 			bufferedReader.close();
 			fileReader.close();
-
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return validStrings.toString();
+		return list;
+		//return validStrings.toString();
 	}
 	
 	public static boolean isGreaterThanThreeAndNotThe(String element) {

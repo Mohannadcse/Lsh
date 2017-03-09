@@ -1,5 +1,6 @@
 package com.bruno.tests;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class TestLSH {
@@ -18,9 +19,13 @@ public class TestLSH {
 
 	private static void throwInBuckets(int[][] signature) {
 		
-		HashMap<int[], int[]> buckets = new HashMap<int[], int[]>(4);
+		//HashMap<Integer, int[]> buckets = new HashMap<Integer, int[]>(4);
+		HashMap<String, int[]> buckets = new HashMap<String, int[]>(1);
 		
-		for (int bend = 0; bend < B; bend++) {
+		System.out.println(buckets.size());
+		
+		//for (int bend = 0; bend < B; bend++) {
+		for (int bend = 0; bend < 1; bend++) {
 			
 			System.out.println();
 
@@ -28,25 +33,29 @@ public class TestLSH {
 				int counter = 0;
 				
 				int array[] = new int[R];
+				String s = "";
 				
 				for (int row = R * bend; counter < R; row++, counter++) {
 					array[counter] = signature[row][col];
+					s += signature[row][col];
 					//System.out.print(signature[row][col] + " ");
 					
-					
-					if(buckets.containsKey(array)){
-						System.out.println("hashed with: " + array);
-					}
-					else{
-						System.out.println("added: " + array);
-						buckets.put(array, array);
-					}
-					
 				}
+				//System.out.println(s.hashCode());
+				if(buckets.containsKey(s)){
+					System.out.println("hashed with: " + Arrays.toString(array));
+				}
+				else{
+					System.out.println("added: " + Arrays.toString(array));
+					buckets.put(s, array);
+				}
+				
 				System.out.println();
 			}
 			System.out.println();
 		}
+		
+		System.out.println(buckets.size());
 	
 
 	}

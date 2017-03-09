@@ -7,8 +7,8 @@ import com.bruno.methods.Shingle;
 public class Document {
 
 	private String name;
-	private List<String> shingles;
-	private int[] bitVector;
+	private List<String> words;
+	private byte[] bitVector;
 	private int[] minHash;
 	
 	public Document(){}
@@ -22,20 +22,20 @@ public class Document {
 		return this;
 	}
 
-	public List<String> getShingles() {
-		return shingles;
+	public List<String> getValidWords() {
+		return words;
 	}
 
-	public Document setShingles(List<String> shingles) {
-		this.shingles = shingles;
+	public Document setValidWords(List<String> words) {
+		this.words = words;
 		return this;
 	}
 
-	public int[] getBitVector() {
+	public byte[] getBitVector() {
 		return bitVector;
 	}
 
-	public Document setBitVector(int[] bitVector) {
+	public Document setBitVector(byte[] bitVector) {
 		this.bitVector = bitVector;
 		return this;
 	}
@@ -46,10 +46,10 @@ public class Document {
 	}
 
 	public void initializeBitVector(int size) {
-		this.bitVector = new int[size];
+		this.bitVector = new byte[size];
 	}
 
-	public void updateBitVector(int value, int position) {
+	public void updateBitVector(byte value, int position) {
 		this.bitVector[position] = value;
 		
 	}

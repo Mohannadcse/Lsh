@@ -2,6 +2,7 @@ package com.bruno.tests;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class TestMinhashBookExample {
 
@@ -35,9 +36,18 @@ public class TestMinhashBookExample {
 		listDocuments.add(document4);
 
 		for (int i = 0; i < listDocuments.size(); i++) {
+			
+			Random rand = new Random();
+			int a = rand.nextInt(60000) + 0;
+			int b = rand.nextInt(60000) + 0;
+			int p  = 62383;
+			
 			int[] document = listDocuments.get(i);
-			int valueHash1 = calculateHash(document, 1);// document, hash function id
-			int valueHash2 = calculateHash(document, 2);// document, hash function id
+			//int valueHash1 = calculateHash(document, 1);// document, hash function id
+			//int valueHash2 = calculateHash(document, 2);// document, hash function id
+			
+			int valueHash1 = calculateHash(document, a, b, p);// document, hash function id
+			int valueHash2 = calculateHash(document, a, b, p);// document, hash function id
 
 			signature = updateSigMatrix(valueHash1, 1, signature, i);// value, hash function id
 			signature = updateSigMatrix(valueHash2, 2, signature, i);// value, hash function id
@@ -53,11 +63,23 @@ public class TestMinhashBookExample {
 
 	}
 
-	private static int calculateHash(int[] document, int hashId) {
+	private static int calculateHash(int[] document, int a, int b, int p) {
 
 		int minHash = Integer.MAX_VALUE;
+		
+		
+		
+		for (int i = 0; i < document.length; i++) {
+			if (document[i] == 1) {
+				int hashValue = (a*i + b) % p;
 
-		if (hashId == 1) {
+				if (hashValue < minHash) {
+					minHash = hashValue;
+				}
+			}
+		}
+		
+		/*if (hashId == 1) {
 
 			for (int i = 0; i < document.length; i++) {
 				if (document[i] == 1) {
@@ -79,7 +101,7 @@ public class TestMinhashBookExample {
 					}
 				}
 			}
-		}
+		}*/
 
 		return minHash;
 	}
