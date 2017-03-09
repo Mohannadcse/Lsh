@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.bruno.helper.MyReader;
-import com.bruno.methods.Shingle;
 import com.bruno.model.Document;
 
 public class App {
@@ -31,7 +30,8 @@ public class App {
 		System.out.println("parsing...");
 		for(int i = 0; i < listOfFiles.length; i++){
 			
-			List<String> listValid = MyReader.readFile(listOfFiles[i]);
+			//List<String> listValid = MyReader.readFile(listOfFiles[i]);
+			Set<String> listValid = MyReader.readFile(listOfFiles[i]);
 			
 			if(listValid.size() < min)
 				min = listValid.size();
@@ -41,12 +41,10 @@ public class App {
 			
 			Document document = new Document();
 			
-			document.setName(listOfFiles[i].getName())
-				.setValidWords(listValid);
+			document.setName(listOfFiles[i].getName()).setValidWords(listValid);
 			
-			/*if(listValid.size() == 1){
-				System.out.println("stop");
-			}*/
+			//document.setName(listOfFiles[i].getName());
+			
 			
 			listDocuments.add(document);
 			
@@ -70,21 +68,28 @@ public class App {
 		
 		
 		//vocabulario tem que ser reduzido
-		int mat[][] = new int[62376][24009];
-		System.out.println("vector created");
+
 		
-		/*System.out.println("setting bit array for each document");
+		System.out.println("setting bit array for each document");
+		
+		//initialize bitvector for each document
 		for(Document document : listDocuments){
 			document.initializeBitVector(vocabulary.size());
+		}
+		
+		int counter = 0;
+		for(String word : vocabulary){//for each vocabulary word
 			
-			for(int i = 0; i < document.getValidWords().size(); i++){
-				String word = document.getValidWords().get(i);
+			for(Document document : listDocuments){//check if documents have this word
 				
-				if(vocabulary.contains(word)){
-					document.updateBitVector((byte)1, i);
+				if(document.hasWord(word)){
+					document.updateBitVector((byte)1, counter);
 				}
 			}
-		}*/
+			counter++;
+		}
+		
+		System.out.println(counter);
 		
 	}
 }

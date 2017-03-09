@@ -1,17 +1,22 @@
 package com.bruno.model;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.bruno.methods.Shingle;
 
 public class Document {
 
 	private String name;
-	private List<String> words;
+	private Set<String> words;
 	private byte[] bitVector;
 	private int[] minHash;
 	
-	public Document(){}
+	public Document(){
+		words = new HashSet<String>();
+	}
 
 	public String getName() {
 		return name;
@@ -22,11 +27,11 @@ public class Document {
 		return this;
 	}
 
-	public List<String> getValidWords() {
+	public Set<String> getValidWords() {
 		return words;
 	}
 
-	public Document setValidWords(List<String> words) {
+	public Document setValidWords(Set<String> words) {
 		this.words = words;
 		return this;
 	}
@@ -56,6 +61,14 @@ public class Document {
 	
 	public void updateMinHash(int value, int position){
 		this.minHash[position] = value;
+	}
+
+	public boolean hasWord(String word) {
+		
+		if(words.contains(word))
+			return true;
+		
+		return false;
 	}
 	
 }
