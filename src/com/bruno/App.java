@@ -64,6 +64,7 @@ public class App {
 			vocabulary.add(validString);
 		}
 		
+		System.out.println("total documents: " + listDocuments.size());
 		System.out.println("Vocabulary: " + vocabulary.size());
 		
 		
@@ -74,7 +75,7 @@ public class App {
 		
 		System.out.println("setting bit array for each document");
 		
-		int counter = 0;
+		/*int counter = 0;
 		for(String word : vocabulary){
 			
 			for(Document document : listDocuments){
@@ -84,11 +85,11 @@ public class App {
 			}
 			
 			counter++;
-		}
+		}*/
 		
 		for(Document document : listDocuments){
 			document.initializeBitVector(vocabulary.size());
-			
+			System.out.println(document.getBitVector().length);
 			/*for(int i = 0; i < document.getValidWords().size(); i++){
 				String word = document.getValidWords().get(i);
 				

@@ -1,6 +1,5 @@
 package com.bruno.model;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.bruno.methods.Shingle;
@@ -8,7 +7,7 @@ import com.bruno.methods.Shingle;
 public class Document {
 
 	private String name;
-	private HashMap<String, String> words;
+	private List<String> words;
 	private byte[] bitVector;
 	private int[] minHash;
 	
