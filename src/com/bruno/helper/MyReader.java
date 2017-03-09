@@ -17,6 +17,7 @@ public class MyReader {
 		FileReader fileReader;
 		List<String> list = new ArrayList<String>();
 		
+		
 		try {
 			fileReader = new FileReader(file);
 			BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -25,6 +26,8 @@ public class MyReader {
 			while ((line = bufferedReader.readLine()) != null) {
 				
 				String myRow[] = line.split(" ");
+				
+				//StringBuffer validStrings = new StringBuffer();
 				
 				for(String element : myRow){
 					
@@ -36,12 +39,11 @@ public class MyReader {
 						
 						if(!"the".contains(element.trim())){
 							list.add(element.trim());
-							//validStrings.append(element + " ");
+							//validStrings.append(element.trim());
 						}
-						
-						
 					}
 				}
+				//list.add(validStrings.toString());
 			}
 			
 			bufferedReader.close();

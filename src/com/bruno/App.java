@@ -21,8 +21,8 @@ public class App {
 		List<String> listValidElementsByDocument = new ArrayList<String>();
 		
 		
-		File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
-		//File folder = new File("/home/bsilva/Desktop/F16PA2");
+		//File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
+		File folder = new File("/home/bsilva/Desktop/F16PA2");
 		File[] listOfFiles = folder.listFiles();
 		 
 		int min = Integer.MAX_VALUE;
@@ -41,12 +41,10 @@ public class App {
 			
 			Document document = new Document();
 			
-			document.setName(listOfFiles[i].getName())
-				.setValidWords(listValid);
+			document.setName(listOfFiles[i].getName()).setValidWords(listValid);
 			
-			/*if(listValid.size() == 1){
-				System.out.println("stop");
-			}*/
+			//document.setName(listOfFiles[i].getName());
+			
 			
 			listDocuments.add(document);
 			
@@ -70,21 +68,35 @@ public class App {
 		
 		
 		//vocabulario tem que ser reduzido
-		int mat[][] = new int[23333][1];
-		System.out.println("vector created");
+		//int mat[][] = new int[vocabulary.size()/3][listOfFiles.length];//[total_vocabulary, total_documents]
+		//int mat[][] = new int[vocabulary.size()][listOfFiles.length];
+		//System.out.println("vector created");
 		
-		/*System.out.println("setting bit array for each document");
+		System.out.println("setting bit array for each document");
+		
+		int counter = 0;
+		for(String word : vocabulary){
+			
+			for(Document document : listDocuments){
+				
+				if(documentHasWord())
+				
+			}
+			
+			counter++;
+		}
+		
 		for(Document document : listDocuments){
 			document.initializeBitVector(vocabulary.size());
 			
-			for(int i = 0; i < document.getValidWords().size(); i++){
+			/*for(int i = 0; i < document.getValidWords().size(); i++){
 				String word = document.getValidWords().get(i);
 				
 				if(vocabulary.contains(word)){
 					document.updateBitVector((byte)1, i);
 				}
-			}
-		}*/
+			}*/
+		}
 		
 	}
 }
