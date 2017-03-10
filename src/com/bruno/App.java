@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.bruno.helper.MyReader;
+import com.bruno.helper.SignatureMatrixHelper;
 import com.bruno.model.Document;
 
 public class App {
@@ -43,10 +44,7 @@ public class App {
 			}
 		}
 		
-		System.out.println("min: " + min);
-		System.out.println("max: " + max);
-		
-		System.out.println("valid elements: " + listValidElementsByDocument.size());
+		System.out.println("total valid elements: " + listValidElementsByDocument.size());
 
 		System.out.println("building vocabulary...");
 		for(String validString : listValidElementsByDocument){
@@ -55,11 +53,8 @@ public class App {
 		}
 		
 		System.out.println("total documents: " + listDocuments.size());
-		System.out.println("Vocabulary: " + vocabulary.size());
+		System.out.println("total vocabulary: " + vocabulary.size());
 		
-		
-		//vocabulario tem que ser reduzido
-
 		
 		System.out.println("setting bit array for each document");
 		for(Document document : listDocuments){
@@ -79,8 +74,9 @@ public class App {
 
 		System.out.println(counter);
 		
-		int mat[][] = new int[40][24008];
+		int signature[][] = SignatureMatrixHelper.build(listDocuments, 2);
 		System.out.println("sig matrix created");
+		
 		
 	}
 }
