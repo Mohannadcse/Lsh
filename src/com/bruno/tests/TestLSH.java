@@ -3,6 +3,7 @@ package com.bruno.tests;
 import java.util.ArrayList;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -65,6 +66,7 @@ public class TestLSH {
 			bucketsAllBands.add(bend, buckets);
 		}
 		
+		//printing buckets per band
 		for(int i = 0; i < bucketsAllBands.size(); i++ ){
 			
 			HashMap<String, List<String>> hashMap = bucketsAllBands.get(i);
@@ -82,6 +84,26 @@ public class TestLSH {
 			}
 			System.out.println();
 		}
+		
+		
+		//printing all similar documents
+		for(String documentName : names){
+			
+			for(int i = 0; i < bucketsAllBands.size(); i++){
+			
+				//get bucket for band i
+				HashMap<String, List<String>> buckets = bucketsAllBands.get(i);
+				for(List<String> listBucketsInBand : buckets.values()){
+					
+					System.out.println("stop");
+					
+				}
+				
+				
+			}
+			
+		}
+		
 
 	}
 
