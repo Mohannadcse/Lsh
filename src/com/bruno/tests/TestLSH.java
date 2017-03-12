@@ -1,5 +1,6 @@
 package com.bruno.tests;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import java.util.Arrays;
@@ -46,7 +47,12 @@ public class TestLSH {
 		list.add(d3);
 		list.add(d4);
 		
-		Lsh.calculate(list, signature);
+		try {
+			Lsh.calculate(list, signature);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//printMatrix(signature);
 		//printBends(signature);

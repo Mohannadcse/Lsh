@@ -1,7 +1,7 @@
 package com.bruno;
 
 import java.io.File;
-
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,8 +24,8 @@ public class App {
 		List<String> listValidElementsByDocument = new ArrayList<String>();
 		
 		
-		//File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
-		File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/baseball");
+		File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
+		//File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/baseball");
 		//File folder = new File("/home/bsilva/Desktop/F16PA2");
 		File[] listOfFiles = folder.listFiles();
 				
@@ -78,7 +78,11 @@ public class App {
 		int signature[][] = SignatureMatrixHelper.build(listDocuments, TOTAL_HASH_FUNCTIONS);
 		System.out.println("sig matrix created");
 		
-		Lsh.calculate(listDocuments, signature);
+		try {
+			Lsh.calculate(listDocuments, signature);
+		} catch (FileNotFoundException e) {
+			System.out.println("error saving excel file");
+		}
 		
 	}
 }

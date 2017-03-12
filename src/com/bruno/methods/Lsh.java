@@ -1,5 +1,7 @@
 package com.bruno.methods;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,13 +23,17 @@ public class Lsh {
 	private static int TOTAL_DOCUMENTS;
 	private static final int TOTAL_HASH = 50;
 	
-	public static void calculate(List<Document> listDocuments, int[][] signature) {
+	public static void calculate(List<Document> listDocuments, int[][] signature) throws FileNotFoundException {
 		
 		TOTAL_DOCUMENTS = listDocuments.size();
+		
+		PrintWriter writer = new PrintWriter("/Users/bruno/Desktop/result.csv");
 		
 		List<HashMap<String, List<String>>> bucketsAllBands = new ArrayList<HashMap<String, List<String>>>();
 		
 		String names[] = makeListNames(listDocuments);
+		StringBuilder s = new StringBuilder();
+		StringBuilder result = new StringBuilder();
 		
 		for (int bend = 0; bend < B; bend++) {
 			
@@ -38,7 +44,7 @@ public class Lsh {
 				
 				int array[] = new int[R];
 				//String s = "";
-				StringBuilder s = new StringBuilder();
+				s.setLength(0);
 				
 				for (int row = R * bend; counter < R; row++, counter++) {
 					array[counter] = signature[row][col];
@@ -107,14 +113,22 @@ public class Lsh {
 			
 			//At this point we have all similar docc for given target document
 			//These are the similar documents
+			result.setLength(0);
 			for(String str : similarDocuments){
-				if(str.contains(names[docCounter]))
-					System.out.print(str + " ");
+				if(str.contains(names[docCounter])){
+					//System.out.print(str + " ");
+					result.append(str);
+				}
+					
 			}
+			
+			writer.println("Similar to " + names[docCounter] + "," + result.toString());
+			
 			System.out.println();
 			
 		}
-
+		
+		writer.close();
 	}
 		
 	private static Set<String> insertDocumentsToSet(List<String> listBucketsInBand) {
