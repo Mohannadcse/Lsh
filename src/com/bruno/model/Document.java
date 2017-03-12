@@ -12,7 +12,6 @@ public class Document {
 
 	private Set<String> words;
 	private byte[] bitVector;
-	private int[] minHash;
 	
 	public Document(){
 		words = new HashSet<String>();
@@ -57,10 +56,6 @@ public class Document {
 	public void updateBitVector(byte value, int position) {
 		this.bitVector[position] = value;
 		
-	}
-	
-	public void updateMinHash(int value, int position){
-		this.minHash[position] = value;
 	}
 
 	public boolean hasWord(String word) {

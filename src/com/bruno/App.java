@@ -9,9 +9,12 @@ import java.util.Set;
 
 import com.bruno.helper.MyReader;
 import com.bruno.helper.SignatureMatrixHelper;
+import com.bruno.methods.Lsh;
 import com.bruno.model.Document;
 
 public class App {
+	
+	private static int TOTAL_HASH_FUNCTIONS = 50;
 	
 	public static void main(String[] args) {
 		
@@ -21,13 +24,10 @@ public class App {
 		List<String> listValidElementsByDocument = new ArrayList<String>();
 		
 		
-		//File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
-		File folder = new File("/home/bsilva/Desktop/F16PA2");
+		File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
+		//File folder = new File("/home/bsilva/Desktop/F16PA2");
 		File[] listOfFiles = folder.listFiles();
-		 
-		int min = Integer.MAX_VALUE;
-		int max = 0;
-		
+				
 		System.out.println("parsing...");
 		for(int i = 0; i < listOfFiles.length; i++){
 			
@@ -48,7 +48,7 @@ public class App {
 
 		System.out.println("building vocabulary...");
 		for(String validString : listValidElementsByDocument){
-			
+			//making unique elements
 			vocabulary.add(validString);
 		}
 		
@@ -72,11 +72,12 @@ public class App {
 			counter++;
 		}
 
-		System.out.println(counter);
 		
-		int signature[][] = SignatureMatrixHelper.build(listDocuments, 2);
+		System.out.println("creating signature matrix");
+		int signature[][] = SignatureMatrixHelper.build(listDocuments, TOTAL_HASH_FUNCTIONS);
 		System.out.println("sig matrix created");
 		
+		Lsh.calculate(listDocuments, signature);
 		
 	}
 }

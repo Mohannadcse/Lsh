@@ -45,7 +45,9 @@ public class TestMinhashBookExample {
 			}
 			System.out.println();
 		}
-
+		System.out.println("stop");
+		//call LSH
+		
 	}
 
 }
