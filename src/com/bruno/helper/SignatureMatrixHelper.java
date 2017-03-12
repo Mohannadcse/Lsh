@@ -42,7 +42,7 @@ public class SignatureMatrixHelper {
 		int randomValues[] = new int[totalHashFunctions];
 		
 		for(int i = 0; i < totalHashFunctions; i++){
-			randomValues[i] = rand.nextInt(60000) + 0;
+			randomValues[i] = rand.nextInt(6000) + 0;
 		}
 		
 		return randomValues;

@@ -33,7 +33,7 @@ public class Lsh {
 			
 			HashMap<String, List<String>> buckets = new HashMap<String, List<String>>();
 			
-			for (int col = 0; col < TOTAL_DOCUMENTS; col = col + 8) {
+			for (int col = 0; col < TOTAL_DOCUMENTS; col++) {
 				int counter = 0;
 				
 				int array[] = new int[R];
@@ -65,7 +65,7 @@ public class Lsh {
 		}
 		
 		//printing buckets per band
-		for(int i = 0; i < bucketsAllBands.size(); i++ ){
+		/*for(int i = 0; i < bucketsAllBands.size(); i++ ){
 			
 			HashMap<String, List<String>> hashMap = bucketsAllBands.get(i);
 			Set<String> keysBuckets = hashMap.keySet();
@@ -81,11 +81,11 @@ public class Lsh {
 				System.out.println();
 			}
 			System.out.println();
-		}
+		}*/
 		
 		
 		//printing all similar documents
-		for(int docCounter = 0; docCounter < names.length; docCounter++){
+		for(int docCounter = 0; docCounter < names.length; docCounter = docCounter + 8){
 			System.out.println("getting similar docs for " + names[docCounter]);
 			
 			Set<String> similarDocuments = null; 
@@ -108,7 +108,8 @@ public class Lsh {
 			//At this point we have all similar docc for given target document
 			//These are the similar documents
 			for(String str : similarDocuments){
-				System.out.print(str + " ");
+				if(str.contains(names[docCounter]))
+					System.out.print(str + " ");
 			}
 			System.out.println();
 			

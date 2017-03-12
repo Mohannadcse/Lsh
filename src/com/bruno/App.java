@@ -24,7 +24,8 @@ public class App {
 		List<String> listValidElementsByDocument = new ArrayList<String>();
 		
 		
-		File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
+		//File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/F16PA2");
+		File folder = new File("/Users/bruno/Desktop/UNL/big_data/hw3/baseball");
 		//File folder = new File("/home/bsilva/Desktop/F16PA2");
 		File[] listOfFiles = folder.listFiles();
 				
